@@ -109,6 +109,7 @@ public class ProductDigitization {
 
 				}
 			} catch (InputMismatchException e) {
+				sc.next(); //The exception leaves the invalid input in token so we are going to burn that token.
 				System.out.println("Non-integer option entered.");
 			}
 
