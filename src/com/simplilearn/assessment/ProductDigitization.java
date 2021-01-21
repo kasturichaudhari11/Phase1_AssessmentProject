@@ -1,13 +1,8 @@
 package com.simplilearn.assessment;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class ProductDigitization {
@@ -58,7 +53,7 @@ public class ProductDigitization {
 
 	}
 
-	// Implement option 1: Return the current file names in ascending order.
+	// Implement main option 1: Return the current file names in ascending order.
 
 	private static String[] retrievedSortedFileList() {
 		String[] sortedList = null;
@@ -75,7 +70,9 @@ public class ProductDigitization {
 
 		return sortedList;
 	}
-
+	
+	// Implement main option 2: Return the details of the user interface displaying sub options.
+	
 	private static void userInterface() {
 		int option = 0;
 		do {
@@ -118,6 +115,9 @@ public class ProductDigitization {
 		} while (option != 4);
 
 	}
+	
+	
+	// Implement sub option 1: Return the current file names in ascending order.
 
 	private static void addFile() {
 		String rootDirectory = "resources";
@@ -137,53 +137,43 @@ public class ProductDigitization {
 		}
 
 	}
+	
+	// Implement sub option 2: Delete a user specified file from the existing directory list.
 
 	private static void deleteFile() {
-		String rootDirectory = "resources";
-		File directory = new File(rootDirectory);
-		String[] sortedList = null;
-		if (directory.isDirectory()) {
-			sortedList = directory.list();
+		String fileName = searchFile();
+		if (fileName != null) {
+			File file = new File(fileName);
+			file.delete();
+			System.out.println("File deleted.");
 		}
-		System.out.println("Enter the file name: ");
-		String name = sc.next();
-		File file = new File(rootDirectory, name);
-		boolean fileFound = false;
 
-		for (int i = 0; i < sortedList.length; i++) {
-			if (name.compareTo(sortedList[i]) == 0) {
-				fileFound = true;
-				file.delete();
-				System.out.println("File deleted");
-				break;
-			}
-		}
-		if(!fileFound)
-			System.out.println("File not found.");
 	}
+	
+	// Implement sub option 2: Search a user specified file from the main directory.
 
-	private static void searchFile() {
+	private static String searchFile() {
 		String rootDirectory = "resources";
 		System.out.println("Enter the file name: ");
 		String name = sc.next();
+		String filePath = null;
 
 		String[] sortedList = null;
 		File directory = new File(rootDirectory);
 		if (directory.isDirectory()) {
 			sortedList = directory.list();
 		}
-		
-		boolean fileFound = false;
 
 		for (int i = 0; i < sortedList.length; i++) {
 			if (name.compareTo(sortedList[i]) == 0) {
-				fileFound = true;
-				System.out.println("File is found." + " " + directory.getAbsolutePath() + "\\" + name);
+				filePath = directory.getAbsolutePath() + "\\" + name;
+				System.out.println("File is found." + " " + filePath);
 				break;
 			}
 		}
-		if(!fileFound)
-			System.out.println("File not found.");			
+		if (filePath == null)
+			System.out.println("File not found.");
+		return filePath;
 	}
 
 }
