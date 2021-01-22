@@ -19,7 +19,7 @@ public class ProductDigitization {
 
 		do {
 			System.out.println(" \n" + "Select one of the following options: \n"
-					+ "1: Return the current file names in ascending order. \n" + "2: Details of the user interface \n"
+					+ "1: Return the current file names in ascending order. \n" + "2: File operations to perform. \n"
 					+ "3: Close the application.");
 
 			try {
